@@ -10,6 +10,10 @@ class CodeaController extends Controller
         return view('welcome');
     }
 
+    public function audio(Request $request){
+        return 'user';
+    }
+
     public function store(){
 
     }
