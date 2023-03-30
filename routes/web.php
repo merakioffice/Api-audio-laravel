@@ -8,4 +8,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::post('codea', [CodeaController::class, 'index']);
