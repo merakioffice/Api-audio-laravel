@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/audio', [CodeaController::class, 'audio']);
+Route::post('/sonido', [CodeaController::class, 'audio']);
