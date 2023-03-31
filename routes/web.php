@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CodeaController;
+use App\Http\Controllers\AudioController;
 
 
 Route::get('/', function () {
@@ -9,4 +9,4 @@ Route::get('/', function () {
 });
 
 
-Route::post('codea', [CodeaController::class, 'index']);
+Route::post('codea', [AudioController::class, 'index']);
