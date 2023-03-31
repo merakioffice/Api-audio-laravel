@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AudioController;
+use App\Http\Controllers\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisterUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/sonido', [AudioController::class, 'audio']);
+
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+
+//Desloguearse
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+Route::post('/register', [RegisterUserController::class, 'store']);
