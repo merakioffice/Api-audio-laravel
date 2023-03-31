@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Audios;
 
 
-class CodeaController extends Controller
+class AudioController extends Controller
 {
 
     public function audio(Request $request){
