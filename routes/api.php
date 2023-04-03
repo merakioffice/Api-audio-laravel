@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/sonido', [AudioController::class, 'audio']);
+Route::middleware('auth.api')->post('/sonido', [AudioController::class, 'audio']);
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
@@ -30,3 +30,5 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 Route::post('/register', [RegisterUserController::class, 'store']);
+
+Route::middleware('auth:sanctum')->get('/me', [AuthenticatedSessionController::class, 'me']);
