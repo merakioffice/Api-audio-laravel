@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Audios;
 
 
@@ -17,15 +18,16 @@ class AudioController extends Controller
         $filename = $request->audio->getClientOriginalName();
         $name_File = str_replace(" ", "_", $filename);
 
-        $audio->name = $name_File;
-
+        $audio->name = "audios/$name_File";
 
         $audio->user_id = auth()->user()->id;
-
 
         $request->audio->storeAs('audios', $name_File);
 
         $audio->save();
+
+        /* $contents = Storage::get('audios/canserb_ero.mp3');
+ */
 
         return $audio;
     }
