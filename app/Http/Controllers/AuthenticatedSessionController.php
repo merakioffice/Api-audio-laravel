@@ -15,13 +15,15 @@ class AuthenticatedSessionController extends Controller
             'password' =>['required', 'string'],
         ]);
 
-        if ( ! Auth::attempt($credentials, $request->only('email', 'password'))){
-            throw ValidationException::withMessages([
-                'email'=> 'Estas Credenciales no coinciden!'
+        if (Auth::attempt($credentials)) {
+            $token = $request->user()->createToken('oas');
+
+            return response()->json([
+                'token' => $token->plainTextToken
             ]);
         }
 
-        return json_encode(Auth::user());
+        return response()->json("Usuario y/o contraseña inválido");
 
     }
 
@@ -32,5 +34,10 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return 'register secces';
+    }
+
+    public function me(Request $request)
+    {
+        return response()->json(auth()->user());
     }
 }

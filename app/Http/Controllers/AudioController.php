@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Audios;
 
 
@@ -22,7 +23,7 @@ class AudioController extends Controller
 
         $audio->save();
 
-        return $request;
+        return $audio;
     }
 
 
