@@ -17,7 +17,6 @@ class AuthenticatedSessionController extends Controller
 
         if (Auth::attempt($credentials)) {
             $token = $request->user()->createToken('oas');
-
             return response()->json([
                 'token' => $token->plainTextToken
             ]);

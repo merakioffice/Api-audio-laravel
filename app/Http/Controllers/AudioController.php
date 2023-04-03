@@ -19,6 +19,10 @@ class AudioController extends Controller
 
         $audio->name = $name_File;
 
+
+        $audio->user_id = auth()->user()->id;
+
+
         $request->audio->storeAs('audios', $name_File);
 
         $audio->save();
