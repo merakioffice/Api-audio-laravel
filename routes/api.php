@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::middleware('auth.api')->post('/sonido', [AudioController::class, 'audio']);
+Route::middleware('auth:sanctum')->post('/sonido', [AudioController::class, 'audio']);
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
