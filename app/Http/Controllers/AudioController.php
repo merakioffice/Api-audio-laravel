@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Audios;
-
+use Illuminate\Support\Facades\Storage;
 
 class AudioController extends Controller
 {
@@ -24,8 +24,8 @@ class AudioController extends Controller
 
         $audio->save();
 
-        /* $contents = Storage::get('audios/canserb_ero.mp3');
- */
+        $contents = Storage::get('audios/canserb_ero.mp3');
+
 
         return $audio;
     }
