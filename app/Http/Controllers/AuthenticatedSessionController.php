@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
-    public function store(Request $request){
+    public function store(LoginRequest $request){
 
-        $credentials = $request->validate([
-            'email' =>['required', 'string', 'email'],
-            'password' =>['required', 'string'],
-        ]);
+        $credentials = $request->validated();
 
         if (Auth::attempt($credentials)) {
             $token = $request->user()->createToken('oas');
@@ -22,7 +19,9 @@ class AuthenticatedSessionController extends Controller
             ]);
         }
 
-        return response()->json("Usuario y/o contraseña inválido");
+        return response()->json([
+            'message' => "Usuario y/o contraseña inválido"
+        ],404);
 
     }
 
