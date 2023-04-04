@@ -3,27 +3,24 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules;
-use Illuminate\Http\Request;
+use App\Http\Requests\EditRequest;
 use App\Models\User;
 
 class RegisterUserController extends Controller
 {
-    public function store(Request $request){
-            $request->validate([
-            'name'=> ['required', 'string', 'max:255'],
-            'email'=> ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'=> ['min:9', 'required']
-        ]);
+    public function store(EditRequest $request){
+            $request->validated();
 
-        User::create([
+        $user = User::create([
             'name'=> $request->name,
             'email'=> $request->email,
             'password'=> bcrypt($request->password),
         ]);
 
-        return 'Register success';
+        return response()->json([
+            'message' => 'usuario creado',
+            'data' => $user
+        ]);
 
     }
 
