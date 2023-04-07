@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Audio;
 use Illuminate\Http\Request;
-use App\Models\Audios;
 use Illuminate\Support\Facades\Storage;
 
 class AudioController extends Controller
@@ -11,7 +11,7 @@ class AudioController extends Controller
 
     public function audio(Request $request){
 
-        $audio = new Audios;
+        $audio = new Audio;
 
         $filename = $request->audio->getClientOriginalName();
         $name_File = str_replace(" ", "_", $filename);
