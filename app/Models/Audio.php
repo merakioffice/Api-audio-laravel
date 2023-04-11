@@ -12,6 +12,7 @@ class Audio extends Model
     protected $table = 'audios';
     protected $fillable = [
         'name',
+        'minio_id',
         'user_id',
     ];
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\EditUsersController;
 use App\Http\Controllers\Auth\RegisterUserController;
 use App\Http\Controllers\MinIOController;
+use App\Http\Controllers\AudioListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 Route::post('/register', [RegisterUserController::class, 'store']);
 
 Route::middleware('auth:sanctum')->post('/file', [MinIOController::class, 'store']);
+
+Route::middleware('auth:sanctum')->get('/audioList', [AudioListController::class, 'index']);
 
 Route::middleware('auth:sanctum')->prefix('users')->group(function(){
     Route::put('/edit/{user}', [EditUsersController::class, 'edit']);

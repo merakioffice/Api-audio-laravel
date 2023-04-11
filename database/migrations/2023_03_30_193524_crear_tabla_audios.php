@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('audios', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('minio_id');
             $table->string('user_id');
             $table->timestamps();
         });

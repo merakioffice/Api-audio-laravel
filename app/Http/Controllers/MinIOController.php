@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Storage;
 
 class MinIOController extends Controller
 {
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $filename = $request->audio->getClientOriginalName();
 
@@ -18,16 +19,20 @@ class MinIOController extends Controller
 
         $path = $request->file('audio')->store('audios', 's3');
 
+        $ruta = "$name_File/$path";
+
         $audio = Audio::create([
-            'name' => $path,
+            'name' => $name_File,
+            'minio_id' => $path,
             'user_id' => $user_id,
         ]);
 
-        return Storage::disk('s3')->temporaryUrl(
-            $path, now()->addMinutes(5)
-        );
+        return response()->json([
+            'data' => $audio,
+            'file' => Storage::disk('s3')->temporaryUrl(
+                $path,
+                now()->addMinutes(5)
+            )
+        ]);
     }
 }
-
-
-
