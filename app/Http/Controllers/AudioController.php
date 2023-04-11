@@ -14,18 +14,20 @@ class AudioController extends Controller
         $audio = new Audio;
 
         $filename = $request->audio->getClientOriginalName();
+
         $name_File = str_replace(" ", "_", $filename);
 
         $audio->name = "audios/$name_File";
 
         $audio->user_id = auth()->user()->id;
 
+        $audio->minio_id = auth()->user();
+
         $request->audio->storeAs('audios', $name_File);
 
         $audio->save();
 
-        $contents = Storage::get('audios/canserb_ero.mp3');
-
+        $contents = Storage::get($audio->name);
 
         return $audio;
     }
