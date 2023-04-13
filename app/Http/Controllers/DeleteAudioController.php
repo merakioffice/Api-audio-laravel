@@ -12,12 +12,12 @@ class DeleteAudioController extends Controller
 
        $audio = Audio::where('user_id', auth()->user()->id)->get('minio_id');
 
-       $audio_delete = Audio::where(['user_id'=> auth()->user()->id, 'id'=>$id])->delete();
+        $audio_delete = Audio::where(['user_id'=> auth()->user()->id, 'id'=>$id])->delete();
 
         $url = $audio[0]->minio_id;
 
         $disk = Storage::disk('s3')->delete($url);
 
-        return $disk;
+        return "delete file name: $url";
     }
 }

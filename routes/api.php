@@ -25,19 +25,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::middleware('auth:sanctum')->post('/sonido', [AudioController::class, 'audio']);
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-//Desloguearse
+
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
 Route::post('/register', [RegisterUserController::class, 'store']);
 
-Route::middleware('auth:sanctum')->post('/file', [MinIOController::class, 'store']);
-
-Route::middleware('auth:sanctum')->get('/audioList', [AudioListController::class, 'index']);
-
-Route::middleware('auth:sanctum')->patch('/deleteAudio/{id}', [DeleteAudioController::class, 'delete']);
+Route::middleware('auth:sanctum')->group(function(){
+    Route::post('/upload', [MinIOController::class, 'store']);
+    Route::get('/audioList', [AudioListController::class, 'index']);
+    Route::patch('/deleteAudio/{id}', [DeleteAudioController::class, 'delete']);
+});
 
 Route::middleware('auth:sanctum')->prefix('users')->group(function(){
     Route::put('/edit/{user}', [EditUsersController::class, 'edit']);
